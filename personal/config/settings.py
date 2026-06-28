@@ -10,9 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-import environ
 import os
+import sys
 from pathlib import Path
+
+import environ
 
 env = environ.Env(
     # set casting, default value
@@ -44,6 +46,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "articles",
+    "apps.core",
 ]
 
 MIDDLEWARE = [
@@ -90,9 +94,6 @@ DATABASES = {
         "NAME": env("SQL_DATABASE"),
     }
 }
-
-# Use SQLite for tests to speed them up
-import sys
 
 if "test" in sys.argv:
     DATABASES["default"] = {
@@ -151,3 +152,7 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "articles:article_list"
+LOGOUT_REDIRECT_URL = "login"

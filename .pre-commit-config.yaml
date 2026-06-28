@@ -54,7 +54,7 @@ repos:
   hooks:
     - id: runtests
       name: runtests
-      entry: bash -c "cd personal && poetry run coverage run --omit=**/migrations/*,manage.py,config/settings/__init__.py,apps/**/models.py manage.py test --parallel"
+      entry: bash -c "cd personal && poetry run coverage run --omit=**/migrations/*,**/models.py,manage.py,config/settings/__init__.py,apps/**/models.py manage.py test"
       language: system
       pass_filenames: false
       verbose: true

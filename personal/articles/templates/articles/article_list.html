@@ -1,38 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Articles</title>
-  </head>
-  <body>
-    <h1>
-      Articles
-    </h1>
-    <a href="{% url 'articles:article_add' %}"><button>Create Article</button></a>
-    <ul>
-      {% for article in articles %}
-        <li>
-          <h2>
-            {{ article.title }}
-          </h2>
-          <p>
-            {{ article.content }}
-          </p>
-          <p>
-            Author: {{ article.author.username }}
-          </p>
-          <p>
-            Created at: {{ article.created_at }}
-          </p>
-          <p>
-            Updated at: {{ article.updated_at }}
-          </p>
-          <p>
-            Published: {{ article.is_published }}
-          </p>
-        </li>
-      {% endfor %}
-    </ul>
-  </body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Articles{% endblock %}
+
+{% block content %}
+  <h1>Articles</h1>
+  <a href="{% url 'articles:article_add' %}"><button>Create Article</button></a>
+  <ul>
+    {% for article in articles %}
+      <li>
+        <h2>{{ article.title }}</h2>
+        <p>{{ article.content }}</p>
+        <p>Author: {{ article.author.username }}</p>
+        <p>Created at: {{ article.created_at }}</p>
+        <p>Updated at: {{ article.updated_at }}</p>
+        <p>Published: {{ article.is_published }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

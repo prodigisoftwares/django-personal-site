@@ -1,20 +1,31 @@
 {% extends "base.html" %}
 
-{% block title %}Articles{% endblock %}
+{% block title %}
+  Articles
+{% endblock title %}
 
 {% block content %}
-  <h1>Articles</h1>
-  <a href="{% url 'articles:article_add' %}"><button>Create Article</button></a>
-  <ul>
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold">Articles</h1>
+    <a href="{% url 'articles:article_add' %}" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg">
+      Create Article
+    </a>
+  </div>
+  <ul class="space-y-4">
     {% for article in articles %}
-      <li>
-        <h2>{{ article.title }}</h2>
-        <p>{{ article.content }}</p>
-        <p>Author: {{ article.author.username }}</p>
-        <p>Created at: {{ article.created_at }}</p>
-        <p>Updated at: {{ article.updated_at }}</p>
-        <p>Published: {{ article.is_published }}</p>
+      <li class="bg-white rounded-xl border border-slate-200 p-6">
+        <h2 class="text-xl font-semibold mb-2">{{ article.title }}</h2>
+        <p class="text-slate-600 mb-4">{{ article.content }}</p>
+        <div class="flex gap-4 text-sm text-slate-400">
+          <span>{{ article.author.username }}</span>
+          <span>{{ article.created_at|date:"M d, Y" }}</span>
+          {% if article.is_published %}
+            <span class="text-green-600 font-medium">Published</span>
+          {% else %}
+            <span>Draft</span>
+          {% endif %}
+        </div>
       </li>
     {% endfor %}
   </ul>
-{% endblock %}
+{% endblock content %}

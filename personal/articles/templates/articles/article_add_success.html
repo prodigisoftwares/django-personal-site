@@ -1,8 +1,17 @@
 {% extends "base.html" %}
 
-{% block title %}Article Saved{% endblock %}
+{% block title %}
+  Article Saved
+{% endblock title %}
 
 {% block content %}
-  <h1>Article Saved</h1>
-  <p>Your article has been saved successfully.</p>
-{% endblock %}
+  <div class="max-w-2xl">
+    <div class="bg-green-50 border border-green-200 rounded-xl p-8 text-center">
+      <h1 class="text-2xl font-bold text-green-800 mb-2">Article Saved</h1>
+      <p class="text-green-700 mb-6">Your article has been saved successfully.</p>
+      <a href="{% url 'articles:article_list' %}" class="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-6 py-2 rounded-lg">
+        Back to Articles
+      </a>
+    </div>
+  </div>
+{% endblock content %}

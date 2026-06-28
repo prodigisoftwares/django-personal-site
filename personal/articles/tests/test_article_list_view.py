@@ -6,21 +6,22 @@ from articles.models import Article
 
 
 class ArticleListViewTests(TestCase):
-    def setUp(self):
-        self.user = User.objects.create_user(username="testuser", password="password")
-        self.published = Article.objects.create(
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create_user(username="testuser", password="password")
+        cls.published = Article.objects.create(
             title="Published Article",
             content="Some content",
-            author=self.user,
+            author=cls.user,
             is_published=True,
         )
-        self.unpublished = Article.objects.create(
+        cls.unpublished = Article.objects.create(
             title="Draft Article",
             content="Draft content",
-            author=self.user,
+            author=cls.user,
             is_published=False,
         )
-        self.url = reverse("articles:article_list")
+        cls.url = reverse("articles:article_list")
 
     def test_returns_200(self):
         response = self.client.get(self.url)

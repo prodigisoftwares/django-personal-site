@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView
-from .models import Article
+
 from .forms import ArticleForm
+from .models import Article
 
 
 class ArticleListView(ListView):
@@ -13,7 +15,7 @@ class ArticleListView(ListView):
     context_object_name = "articles"
 
 
-class ArticleAddView(View):
+class ArticleAddView(LoginRequiredMixin, View):
     def _get_context(self):
         return {
             "form": ArticleForm(),
